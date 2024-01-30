@@ -62,12 +62,8 @@ bool RemoveUnusedOuterClassVisitor::VisitCXXRecordDecl(
 {
   if (ConsumerInstance->isInIncludedFile(CXXRD) ||
       ConsumerInstance->isSpecialRecordDecl(CXXRD) ||
-      !CXXRD->hasDefinition() ||
-      dyn_cast<ClassTemplateSpecializationDecl>(CXXRD) ||
-      CXXRD->hasUserDeclaredConstructor() ||
-      CXXRD->hasUserDeclaredDestructor() ||
-      CXXRD->getDescribedClassTemplate() || 
-      CXXRD->getNumBases())
+      !CXXRD->hasDefinition()
+      )
     return true;
   ConsumerInstance->CXXRDDefSet.insert(CXXRD->getDefinition());
   return true;

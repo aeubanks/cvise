@@ -35,6 +35,9 @@ class ClangPass(AbstractPass):
                 shutil.move(tmp_file.name, test_case)
                 return (PassResult.OK, state)
             else:
+                logging.error(' '.join(cmd))
+                logging.error('returncode ' + str(returncode))
+                logging.error(stderr)
                 os.unlink(tmp_file.name)
                 if returncode == 255 or returncode == 1:
                     return (PassResult.STOP, state)
